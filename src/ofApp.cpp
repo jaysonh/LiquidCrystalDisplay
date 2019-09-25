@@ -59,11 +59,11 @@ void ofApp::draw()
     else
         filename ="saveFrames/"+ ofToString(ofGetFrameNum()) +".png";
     
-    ofSaveScreen(filename);
+    //ofSaveScreen(filename);
     
-    cout << t3 << endl;
-    if(t3 >= TWO_PI*4)
-        ofExit();
+    //cout << t3 << endl;
+    //if(t3 >= TWO_PI*4)
+    //    ofExit();
 }
 
 //--------------------------------------------------------------
