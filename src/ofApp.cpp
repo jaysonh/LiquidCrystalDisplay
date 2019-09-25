@@ -13,10 +13,10 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-    float t1 = t * 0.100;
-    float t2 = t * 0.050;
-    float t3 = t * 0.025;
-    float t4 = t * 0.200;
+    float t1 = t * 0.0100;
+    float t2 = t * 0.0050;
+    float t3 = t * 0.0025;
+    float t4 = t * 0.0200;
     
     t+= 0.05;
     
@@ -25,29 +25,33 @@ void ofApp::draw()
     float h3 = ofMap( abs(sin(t3 + 0.0)), 0, 1, 0, 255);
     float h4 = ofMap( abs(sin(t4 + 0.0)), 0, 1, 0, 255);
     
-    ofColor c1,c2,c3,c4;
-    c1.setHsb(h1,255,255);
-    c2.setHsb(h2,255,255);
-    c3.setHsb(h3,255,255);
-    c4.setHsb(h4,255,255);
+    ofColor c0,c1,c2,c3;
+    c0.setHsb(h1,255,255);
+    c1.setHsb(h2,255,255);
+    c2.setHsb(h3,255,255);
+    c3.setHsb(h4,255,255);
     
-    int w = 1920;//ofGetWidth();
-    int h = 1080;//ofGetHeight();
+    int width  = 1920;//ofGetWidth();
+    int height = 1080;//ofGetHeight();
     
-    glBegin(GL_QUADS);
-    glColor3f(c1.r/255.0, c1.g/255.0, c1.b / 255.0);
-    glVertex2f(0,0);
+    ofMesh temp;
+    temp.setMode(OF_PRIMITIVE_TRIANGLES);
+    temp.addVertex( ofPoint(0,0) );
+    temp.addColor(ofColor(c0.r,c0.g,c0.b));
+    temp.addVertex( ofPoint(width,0) );
+    temp.addColor(ofColor(c1.r,c1.g,c1.b));
+    temp.addVertex( ofPoint(width,height) );
+    temp.addColor(ofColor(c2.r,c2.g,c2.b));
     
-    glColor3f(c2.r/255.0, c2.g/255.0, c2.b / 255.0);
-    glVertex2f(w,0);
     
-    glColor3f(c3.r/255.0, c3.g/255.0, c3.b / 255.0);
-    glVertex2f(w,h);
+    temp.addVertex( ofPoint(width,height) );
+    temp.addColor(ofColor(c2.r,c2.g,c2.b));
     
-    glColor3f(c4.r/255.0, c4.g/255.0, c4.b / 255.0);
-    glVertex2f(0,h);
-    
-    glEnd();
+    temp.addVertex( ofPoint(0,height) );
+    temp.addColor(  ofColor(c3.r,c3.g,c3.b));
+    temp.addVertex( ofPoint(0,0) );
+    temp.addColor(  ofColor(c0.r,c0.g,c0.b));
+    temp.draw();
     
     string filename ;
     if(ofGetFrameNum() < 10)
